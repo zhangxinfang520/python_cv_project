@@ -82,11 +82,9 @@ cv_show('gray',gray)
 
 #礼帽操作，突出更明亮的区域
 tophat = cv2.morphologyEx(gray, cv2.MORPH_TOPHAT, rectKernel)
-
 cv_show('tophat',tophat)
 #进行梯度处理
 gradX = cv2.Sobel(tophat,ddepth=cv2.CV_32F,dx=1,dy=0, ksize=-1)#ksize=-1相当于用3*3的
-
 gradX = np.absolute(gradX)
 
 (minVal, maxVal) = (np.min(gradX), np.max(gradX))
@@ -101,12 +99,9 @@ cv_show('gradX',gradX)
 #THRESH_OTSU会自动寻找合适的阈值，适合双峰，需把阈值参数设置为0
 thresh = cv2.threshold(gradX, 0, 255,cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
 cv_show('thresh',thresh)
-
 #再来一个闭操作
-
-thresh = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, sqKernel) #再来一个闭操作
+thresh = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, sqKernel)
 cv_show('thresh',thresh)
-
 # 计算轮廓
 threshCnts, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
@@ -115,7 +110,6 @@ cur_img = image.copy()
 cv2.drawContours(cur_img,cnts,-1,(0,0,255),3)
 cv_show('img',cur_img)
 locs = []
-
 #遍历轮廓
 for (i, c) in enumerate(cnts):
 	# 计算矩形
