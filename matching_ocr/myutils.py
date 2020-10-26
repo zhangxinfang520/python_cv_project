@@ -11,7 +11,7 @@ def sort_contours(cnts,method="left-to-right"):
     i=0
     if method == "left-to-right" or method == "bottom-to-top":
         reverse =True
-    if method == "top-to-botton=m" or method == "bottom-to-top":
+    if method == "top-to-bottom" or method == "bottom-to-top":
         i=1
     boundingBoxes = [cv2.boundingRect(c) for c in cnts]#用一个最小的矩形，把找到的形状包起来x,y,h,w
     '''
